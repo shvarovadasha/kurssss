@@ -1,0 +1,2 @@
+login1;pass;admin;12;12;
+login2;pass;user;12;12;
