@@ -38,8 +38,8 @@ int logIn(struct Account *acc, struct Account *accs, int count) //Функция
 int loadAccounts(struct Account *accs) //Чтение аккаунтов из файла
 {
     FILE *f1; //Файл
-    if ((f1 = fopen(pathAccounts, "r+")) == NULL) //Открытие файла
-    {
+    if ((f1 = fopen(pathAccounts, "r+")) == NULL) //Открытие файла , если файл не удалось открыть                                              
+    {                                                          //то возвращается NULL
         printf("Cannot open file.\n");
         exit(1);
     }
@@ -82,7 +82,7 @@ int loadTickets(struct Ticket *t) //Чтение билетов из файла
             p[strlen(p) - 1] = '\0';
         char *str[80];
         strcpy(str, constr);
-        char *token = strtok(str, ";");
+        char *token = strtok(str, ";"); //Разделение строки по символу ";"
         char *pp[80];
         strcpy(pp, token);
         t[i].trainNumber = atoi(pp);
@@ -139,9 +139,9 @@ int saveAccounts(int count, struct Account accs[]) //Сохранение акк
     for (int i = 0; i < count; i++) //Цикл на все аккаунты
     {
         char buf[80];//Временная переменная
-        sprintf(buf, "%s;%s;%s", accs[i].login, accs[i].password, accs[i].role); //Формирование строки с данными ою аккаунте в переменную buf
+        sprintf(buf, "%s;%s;%s", accs[i].login, accs[i].password, accs[i].role); //Формирование строки с данными об аккаунте в переменную buf
         fputs(buf, f2); //Сохренение строки buf в файл
-        if (i + 1 < count) //Добаление перехода на новую строку
+        if (i + 1 < count) //Добавление перехода на новую строку
             fputs("\n", f2);
     }
     fclose(f2); //Закрытие файла
@@ -332,7 +332,7 @@ int main()
     int count; //Переменная количества билетов
     count = loadTickets(tickets); //Загрузка билетов
     int act = 0; //Переменная для меню
-    if (strcmp(acc.role, "admin") == 0) //Меня для администратора
+    if (strcmp(acc.role, "admin") == 0) //Меню для администратора
     {
         while (1)
         {
